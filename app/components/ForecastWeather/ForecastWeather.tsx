@@ -14,10 +14,7 @@ export default function Forecast({city, userInput}: Props) {
     const [error, setError] = useState<Error | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
 
-    /*
-        Using useEffect to observe changes in the 'city'-prop. This holds the sanitized value from the search input and
-        is used in the API request to fetch data about the weather
-    */
+    // Fetches forecast data whenever the 'city'-prop changes. The prop contains the sanitized value from the search input
     useEffect(() => {
         const fetchForecastWeather = async () => {
             try {
@@ -34,10 +31,10 @@ export default function Forecast({city, userInput}: Props) {
             }
         }
         fetchForecastWeather()
-        // When city updates a new request will be made to the API 
+        // Triggers a new API request whenever 'city' changes
     }, [city])
     
-    // Displays error message if an error occurs
+    // Displays error message if the API request fails
     if (error) return <p>Error: {error?.message}</p>
 
     const forecastDays = forecastWeather?.forecast.forecastday || []

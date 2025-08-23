@@ -3,15 +3,15 @@ import React, {useEffect, useState} from "react";
 import Link from "next/link";
 import Hamburger from "hamburger-react";
 
-// The header is used to display the company name, logo and navigation menu. It's also reused across all routes.
+// Header component that provides consistent navigation and branding across all pages
 export default function Header() {
-    // Initializes the state to toggle the visibility of the links in the hamburger menu
+    // Tracks the screen width to be able to control the hamburger menu layout
     const [open, setOpen] = useState<boolean>(false)
-    // Initializes a state variable to keep track if the screen size 
+    // Tracks whether the screen width is below breakpoint to switch the navigation layout
     const [screenSize, setScreenSize] = useState<boolean>(false)
         
     useEffect(() => {
-        // Updates the state based on the width of the window. The state is set to true if the screen is less or equal to 1000px
+        // Dynamically updates screenSize so the navigation adapts to window resizing
         const handleResize = () => setScreenSize(window.innerWidth <= 1024)
 
         handleResize()

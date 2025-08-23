@@ -11,8 +11,8 @@ type Props = {
 }
 
 /* 
-    The component uses a ErrorHandler-component to display an error message if any errors occur during the API request
-    and it also provides the components with the new city and users input.
+    Wraps child components in an ErrorHandler to display errors from API requests. 
+	It also passes the current city and user input to child components
 */
 export default function DataHandler({showCurrentWeather, showForecastWeather}: Props) {
 	// Contains the sanitized input that is used for the API request
@@ -27,10 +27,7 @@ export default function DataHandler({showCurrentWeather, showForecastWeather}: P
 					setNewCity("stockholm")
 					setUserInput("")
 				}}>
-				{/* 
-					The component receives two props that control the visibility of the components and each component
-					dynamically receives values from the 'city' and 'userInput' variables. 
-				*/}
+				{/* Conditionally renders CurrentWeather or ForecastWeather components based on props, passing down 'city' and 'userInput' dynamically */}
 				{showCurrentWeather ? (
 					<>
 						<CurrentWeather city={newCity} userInput={userInput} />
@@ -38,7 +35,7 @@ export default function DataHandler({showCurrentWeather, showForecastWeather}: P
 							<SearchForm setNewCity={setNewCity} setUserInput={setUserInput} />
 						</div>
 					</>
-				) : showForecastWeather ? ( 
+				) : showForecastWeather ? (
 					<>
 						<div className="w-[95%] sm:w-full pb-8">
 							<SearchForm setNewCity={setNewCity} setUserInput={setUserInput} />

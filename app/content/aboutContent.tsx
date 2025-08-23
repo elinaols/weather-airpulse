@@ -1,3 +1,4 @@
+// Content for aboutUs
 export const aboutContent = {
     main: {
         title: 'Airpulse',
