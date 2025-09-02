@@ -35,6 +35,7 @@ export default function CurrentWeather({city, userInput}: Props) {
 				const data: Weather = await response.json()
 				console.log(data)
 				setCurrentWeather(data)
+				localStorage.setItem('lastWeather', data.current.condition.text)
 			} catch (e) {
 				setError(e as Error)
 			} finally {
@@ -71,7 +72,7 @@ export default function CurrentWeather({city, userInput}: Props) {
 						<p className="pb-[1rem]">{weather?.current.condition.text}</p>
 						{weather && <p className="pb-[1rem]">Wind is {meterPerSec(weather?.current.wind_kph)} m/s</p>}
 					</div>
-					<Background weather={weather?.current.condition.text} />
+					<Background weather={localStorage.getItem('lastWeather') || undefined}/>
 				</div>
 			)}
 		</>

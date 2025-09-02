@@ -2,6 +2,7 @@ import React from "react"
 import BoxLarge from "../components/BoxLarge/BoxLarge"
 import BoxSmall from "../components/BoxSmall/BoxSmall"
 import {aboutContent} from "../content/aboutContent"
+import Background from "../components/Background/Background"
 
 export default function AboutUs() {
 	/*
@@ -38,6 +39,7 @@ export default function AboutUs() {
 						title={aboutContent.contact.title}
 					/>
 				</div>
+				<Background weather={localStorage.getItem('lastWeather') || undefined}/>
 			</div>
 		</>
 	)
