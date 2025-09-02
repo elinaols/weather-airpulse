@@ -4,9 +4,10 @@ import Button from "../Button/Button"
 
 type Props = {
 	setNewCity: (city: string) => void
+	setUserInput: (input: string) => void
 }
 
-export default function SearchForm({setNewCity}: Props) {
+export default function SearchForm({setNewCity, setUserInput}: Props) {
 	// Holds the active value of the user's input to allow React to control and track the input
 	const [city, setCity] = useState("")
 	// Stores an error message to inform the user if the input is invalid
@@ -21,6 +22,10 @@ export default function SearchForm({setNewCity}: Props) {
 
 		// Checks if city is empty to avoid sending invalid requests
 		if (!city) return setError("Enter value in the input field")
+
+		// Removes special characters to prevent API errors or malicious input
+		const cleanedStr = city.replace(/[&\/\\#,+()$~%.!'":*?<>{}]/g, "")
+		setUserInput(capatilize(cleanedStr))
 
 		// Replaces special swedish characters for API compatibility
 		const cleanCityStr = city.replace(/[åäÅÄ]/g, "a").replace(/[ö]/g, "o")
