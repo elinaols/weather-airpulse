@@ -39,7 +39,7 @@ export default function AboutUs() {
 						title={aboutContent.contact.title}
 					/>
 				</div>
-				<Background weather={localStorage.getItem('lastWeather') || undefined}/>
+				<Background/>
 			</div>
 		</>
 	)
