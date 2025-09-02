@@ -1,5 +1,4 @@
 import {WeatherHour, WeatherDay} from "@/app/types/types"
-import Image from "next/image"
 
 type Props = {
 	day: WeatherDay
@@ -25,7 +24,8 @@ export default function WeatherCard({day}: Props) {
 		<div className="weatherCard p-3 sm:p-4 md:p-6">
 			<div className="flex justify-between pb-3">
 				<h3 className="text-lg sm:text-xl">{day.date}</h3>
-				<Image src={day.day.condition.icon} alt="Weather icon" width={"60"} height={"60"} />
+				{/* eslint-disable @next/next/no-img-element */}
+				<img src={day.day.condition.icon} alt="Weather icon" width={"60"} height={"60"} />
 			</div>
 			<div className="pb-3">
 				<p>Temp: {day.day.avgtemp_c}°C</p>

@@ -35,7 +35,7 @@ export default function CurrentWeather({city, userInput}: Props) {
 				const data: Weather = await response.json()
 				console.log(data)
 				setCurrentWeather(data)
-				localStorage.setItem('lastCity', data.location.name)
+				localStorage.setItem('lastCity', userInput)
 				localStorage.setItem('lastWeather', data.current.condition.text)
 			} catch (e) {
 				setError(e as Error)
@@ -45,7 +45,7 @@ export default function CurrentWeather({city, userInput}: Props) {
 		}
 		fetchWeather()
 		// Triggers a new API request whenever 'city' changes
-	}, [city])
+	}, [city, userInput])
 
 	// Displays an error message if the request fails
 	if (error) return <p>Error: {error?.message}</p>

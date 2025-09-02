@@ -24,6 +24,7 @@ export default function Forecast({city, userInput}: Props) {
                 const data: WeatherForecast = await response.json()
                 console.log(data)
                 setForecastWeather(data)
+                localStorage.setItem('lastCity', userInput)
                 localStorage.setItem('lastWeather', data.current.condition.text)
             } catch (e) {
                 setError(e as Error)
@@ -33,7 +34,7 @@ export default function Forecast({city, userInput}: Props) {
         }
         fetchForecastWeather()
         // Triggers a new API request whenever 'city' changes
-    }, [city])
+    }, [city, userInput])
     
     // Displays error message if the API request fails
     if (error) return <p>Error: {error?.message}</p>
