@@ -7,7 +7,12 @@ type Props = {
 
 export default function Background({weather}: Props) {
 	// Initialize background state with the last saved gradient from localStorage or use a default gradient if none is found
-	const [background, setBackground] = useState<string>(localStorage.getItem('lastWeather') || "#6991ff, #bbd3ff")
+	const [background, setBackground] = useState("#6991ff, #bbd3ff")
+
+	useEffect(() => {
+		const lastBg = localStorage.getItem('lastWeather')
+		if (lastBg) setBackground(lastBg)
+	})
 
 	/* 
         Using useEffect to detect changes in the 'weather'-prop, which holds values from two different API requests. 
