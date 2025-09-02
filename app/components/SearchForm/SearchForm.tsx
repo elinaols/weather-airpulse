@@ -7,8 +7,6 @@ type Props = {
 	setUserInput: (input: string) => void
 }
 
-// TODO: Create a global state with React Context that holds the city, to be able to have the same background while navigating
-
 export default function SearchForm({setNewCity, setUserInput}: Props) {
 	// Holds the active value of the user's input to allow React to control and track the input
 	const [city, setCity] = useState("")

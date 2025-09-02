@@ -1,17 +1,9 @@
-"use client"
-import React, {useEffect} from "react"
+import React from "react"
 import BoxLarge from "../components/BoxLarge/BoxLarge"
 import BoxSmall from "../components/BoxSmall/BoxSmall"
 import {aboutContent} from "../content/aboutContent"
 
 export default function AboutUs() {
-	useEffect(() => {
-		// Sets default background if none is applied when the page reloads
-		if (!document.body.style.background) {
-			document.body.style.background = `linear-gradient(#eff3ff,#90b9ff)`
-		}
-	}, [])
-
 	/*
         Mapping over the text array of each section and rendering each line as a separate <p>-element with padding
     */
