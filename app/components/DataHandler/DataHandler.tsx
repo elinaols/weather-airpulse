@@ -12,7 +12,7 @@ type Props = {
 
 /* 
     Wraps child components in an ErrorHandler to display errors from API requests. 
-	It also passes the current city and user input to child components
+	It also passes the current city to child components
 */
 export default function DataHandler({showCurrentWeather, showForecastWeather}: Props) {
 	// Contains the sanitized input that is used for the API request

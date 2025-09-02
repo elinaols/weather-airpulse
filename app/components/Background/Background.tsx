@@ -17,7 +17,7 @@ export default function Background({weather}: Props) {
 		if (!weather) return
 
 		const w = weather.toLowerCase()
-		let newBg = background
+		let newBg = ''
 
 		switch (w) {
 			case "sunny":

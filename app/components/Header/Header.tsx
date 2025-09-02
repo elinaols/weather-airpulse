@@ -31,6 +31,7 @@ export default function Header() {
                 <Link href={'/'} className="p-[1rem] font-semibold hover:border-b hover:border-gray-400">Airpulse</Link>
             </div>
             <div className="flex lg:justify-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/sun.webp" alt="Logotype" className="slow-rotation h-[60px] w-[60px]"/>
             </div>
             <div className="navbar">
