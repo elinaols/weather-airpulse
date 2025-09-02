@@ -12,7 +12,7 @@ export default function Background({weather}: Props) {
 	useEffect(() => {
 		const lastBg = localStorage.getItem('lastWeather')
 		if (lastBg) setBackground(lastBg)
-	})
+	}, [])
 
 	/* 
         Using useEffect to detect changes in the 'weather'-prop, which holds values from two different API requests. 
