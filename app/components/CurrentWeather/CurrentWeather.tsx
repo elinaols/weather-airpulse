@@ -1,6 +1,7 @@
 "use client"
 import React, {useEffect, useState} from "react"
 import {Spinner} from "@heroui/spinner"
+import { ApiError } from "next/dist/server/api-utils"
 
 type Props = {
 	city: string
@@ -37,6 +38,13 @@ export default function CurrentWeather({city, userInput, lastCity, setWeatherCon
 
 				const data: Weather = await response.json()
 				console.log(data)
+
+				if ('error' in data) {
+					type ApiError = {error: {code: number, message: string}}
+					setError(new Error((data as ApiError).error.message))
+					setCurrentWeather(null)
+					return
+				}
 
 				setCurrentWeather(data)
 				userInput && localStorage.setItem('lastCity', userInput)
