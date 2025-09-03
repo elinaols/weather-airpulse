@@ -1,7 +1,6 @@
 "use client"
 import React, {useEffect, useState} from "react"
 import {Spinner} from "@heroui/spinner"
-import { ApiError } from "next/dist/server/api-utils"
 
 type Props = {
 	city: string
@@ -32,19 +31,13 @@ export default function CurrentWeather({city, userInput, lastCity, setWeatherCon
 				// Set loading to true until the request is completed
 				setLoading(true)
 
+				const cityQuery = userInput || lastCity || "Stockholm"
 				const response = await fetch(
-					`https://api.weatherapi.com/v1/current.json?key=e59095ee21d54915a00195257251501&q=${encodeURIComponent(city)}`
+					`https://api.weatherapi.com/v1/current.json?key=e59095ee21d54915a00195257251501&q=${encodeURIComponent(cityQuery)}`
 				)
 
 				const data: Weather = await response.json()
 				console.log(data)
-
-				if ('error' in data) {
-					type ApiError = {error: {code: number, message: string}}
-					setError(new Error((data as ApiError).error.message))
-					setCurrentWeather(null)
-					return
-				}
 
 				setCurrentWeather(data)
 				userInput && localStorage.setItem('lastCity', userInput)
