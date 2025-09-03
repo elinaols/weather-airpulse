@@ -4,6 +4,7 @@ import SearchForm from "../SearchForm/SearchForm"
 import CurrentWeather from "../CurrentWeather/CurrentWeather"
 import ErrorHandler from "../ErrorHandler/ErrorHandler"
 import Forecast from "../ForecastWeather/ForecastWeather"
+import Background from "../Background/Background"
 
 type Props = {
 	showCurrentWeather?: boolean
@@ -34,6 +35,9 @@ export default function DataHandler({showCurrentWeather, showForecastWeather}: P
 					setNewCity("stockholm")
 					setUserInput("")
 				}}>
+
+				<Background/>
+
 				{/* Conditionally renders CurrentWeather or ForecastWeather components based on props, passing down 'city' and 'userInput' dynamically */}
 				{showCurrentWeather ? (
 					<>

@@ -74,7 +74,6 @@ export default function CurrentWeather({city, userInput, lastCity}: Props) {
 						<p className="pb-[1rem]">{weather?.current.condition.text}</p>
 						{weather && <p className="pb-[1rem]">Wind is {meterPerSec(weather?.current.wind_kph)} m/s</p>}
 					</div>
-					<Background/>
 				</div>
 			)}
 		</>

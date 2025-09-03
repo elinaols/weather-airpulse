@@ -52,7 +52,6 @@ export default function Forecast({city, userInput, lastCity}: Props) {
                 <p>Loading...</p>
             ) : (
                 <div className="w-[95%] px-[0.4rem] grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <Background weather={localStorage.getItem('lastWeather') || undefined}/>
                     <h2 className="md:col-span-3 lg:text-4xl sm:text-3xl text-2xl py-[1rem]">Next 3 days weather in {userInput || lastCity || forecastWeather?.location.name}</h2>
                     {/* 
                         Checks if the array exists and is not empty to ensure that the component doesn't attempt to iterate over an empty 
