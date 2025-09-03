@@ -61,7 +61,7 @@ export default function CurrentWeather({city, userInput}: Props) {
 			) : (
 				<div className="w-full grid grid-cols-2 gap-y-2 sm:gap-y-10 gap-x-16 pb-8">
 					<h1 className="col-span-2 text-center text-[1.8rem] md:text-[2.6rem] sm:text-4xl lg:text-5xl font-semibold pb-[0.5rem] sm:pb-[1.5rem]">
-						Current weather in {userInput || localStorage.getItem('lastCity') || weather?.location.name}
+						Current weather in {userInput ? userInput : (typeof window !== 'undefined' ? localStorage.getItem('lastCity') : null) || weather?.location.name}
 					</h1>
 					<div className="text-[5rem] flex justify-center flex-col items-center sm:items-end col-span-2 sm:col-span-1">
 						<p className="temperature text-[4rem] sm:text-[4.5rem] md:text-[5rem]">
@@ -73,7 +73,7 @@ export default function CurrentWeather({city, userInput}: Props) {
 						<p className="pb-[1rem]">{weather?.current.condition.text}</p>
 						{weather && <p className="pb-[1rem]">Wind is {meterPerSec(weather?.current.wind_kph)} m/s</p>}
 					</div>
-					<Background weather={localStorage.getItem('lastWeather') || undefined}/>
+					<Background/>
 				</div>
 			)}
 		</>
