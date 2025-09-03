@@ -40,7 +40,9 @@ export default function CurrentWeather({city, userInput, lastCity, setWeatherCon
 				console.log(data)
 
 				setCurrentWeather(data)
-				userInput && localStorage.setItem('lastCity', userInput)
+				if (userInput) {
+					localStorage.setItem('lastCity', userInput)
+				}
 
 				setWeatherCondition(data.current.condition.text)
 				localStorage.setItem('lastWeather', data.current.condition.text)				
@@ -52,7 +54,7 @@ export default function CurrentWeather({city, userInput, lastCity, setWeatherCon
 		}
 		fetchWeather()
 		// Triggers a new API request whenever 'city' changes
-	}, [city, userInput])
+	}, [city, userInput, setWeatherCondition])
 
 	// Displays an error message if the request fails
 	if (error) return <p>Error: {error?.message}</p>

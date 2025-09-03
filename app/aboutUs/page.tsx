@@ -1,10 +1,16 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import BoxLarge from "../components/BoxLarge/BoxLarge"
 import BoxSmall from "../components/BoxSmall/BoxSmall"
 import {aboutContent} from "../content/aboutContent"
 import Background from "../components/Background/Background"
 
 export default function AboutUs() {
+	const [weather, setWeather] = useState<string | null>(null)
+	
+	useEffect(() => {
+		setWeather(localStorage.getItem('lastWeather') || null)
+	}, [])
+
 	/*
         Mapping over the text array of each section and rendering each line as a separate <p>-element with padding
     */
@@ -39,7 +45,7 @@ export default function AboutUs() {
 						title={aboutContent.contact.title}
 					/>
 				</div>
-				<Background/>
+				<Background weather={weather}/>
 			</div>
 		</>
 	)

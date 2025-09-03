@@ -1,6 +1,5 @@
 'use client'
 import React, { useEffect, useState } from "react";
-import Background from "../Background/Background";
 import { WeatherForecast } from "@/app/types/types";
 import WeatherCard from "../WeatherCard/WeatherCard";
 
@@ -30,7 +29,9 @@ export default function Forecast({city, userInput, lastCity, setWeatherCondition
                 console.log(data)
 
                 setForecastWeather(data)
-                userInput && localStorage.setItem('lastCity', userInput)
+                if (userInput) { 
+                    localStorage.setItem('lastCity', userInput)
+                }
 
                 setWeatherCondition(data.current.condition.text)
                 localStorage.setItem('lastWeather', data.current.condition.text)
@@ -42,7 +43,7 @@ export default function Forecast({city, userInput, lastCity, setWeatherCondition
         }
         fetchForecastWeather()
         // Triggers a new API request whenever 'city' changes
-    }, [city, userInput])
+    }, [city, userInput, setWeatherCondition])
     
     // Displays error message if the API request fails
     if (error) return <p>Error: {error?.message}</p>
