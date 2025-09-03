@@ -26,7 +26,7 @@ export default function Forecast({city, userInput, lastCity, setWeatherCondition
                 const data: WeatherForecast = await response.json()
                 console.log(data)
                 setForecastWeather(data)
-                localStorage.setItem('lastCity', userInput)
+                localStorage.setItem('lastCity', userInput || lastCity || '')
                 setWeatherCondition(data.current.condition.text)
                 localStorage.setItem('lastWeather', data.current.condition.text)
             } catch (e) {

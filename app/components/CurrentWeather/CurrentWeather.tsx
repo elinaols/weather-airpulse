@@ -36,7 +36,7 @@ export default function CurrentWeather({city, userInput, lastCity, setWeatherCon
 				const data: Weather = await response.json()
 				console.log(data)
 				setCurrentWeather(data)
-				localStorage.setItem('lastCity', userInput)
+				localStorage.setItem('lastCity', userInput || lastCity || '')
 				setWeatherCondition(data.current.condition.text)
 				localStorage.setItem('lastWeather', data.current.condition.text)
 			} catch (e) {
