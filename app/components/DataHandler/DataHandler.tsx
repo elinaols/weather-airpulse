@@ -21,6 +21,7 @@ export default function DataHandler({showCurrentWeather, showForecastWeather}: P
 	// Contains the sanitized input from the user that views on the screen
 	const [userInput, setUserInput] = useState("")
 	const [lastCity, setLastCity] = useState<string | null>(null)
+	const [weatherCondition, setWeatherCondition] = useState<string>('')
 	
 	// On initial render, retrieve the last searched city from localStorage and set it in state
 	useEffect(() => {
@@ -36,12 +37,12 @@ export default function DataHandler({showCurrentWeather, showForecastWeather}: P
 					setUserInput("")
 				}}>
 
-				<Background/>
+				<Background weather={weatherCondition}/>
 
 				{/* Conditionally renders CurrentWeather or ForecastWeather components based on props, passing down 'city' and 'userInput' dynamically */}
 				{showCurrentWeather ? (
 					<>
-						<CurrentWeather city={newCity} userInput={userInput} lastCity={lastCity} />
+						<CurrentWeather city={newCity} userInput={userInput} lastCity={lastCity} setWeatherCondition={setWeatherCondition} />
 						<div className="w-[95%] sm:w-full pb-8">
 							<SearchForm setNewCity={setNewCity} setUserInput={setUserInput} />
 						</div>
@@ -51,7 +52,7 @@ export default function DataHandler({showCurrentWeather, showForecastWeather}: P
 						<div className="w-[95%] sm:w-full pb-8">
 							<SearchForm setNewCity={setNewCity} setUserInput={setUserInput} />
 						</div>
-						<Forecast city={newCity} userInput={userInput} lastCity={lastCity} />
+						<Forecast city={newCity} userInput={userInput} lastCity={lastCity} setWeatherCondition={setWeatherCondition}/>
 					</>
 				) : null}
 			</ErrorHandler>

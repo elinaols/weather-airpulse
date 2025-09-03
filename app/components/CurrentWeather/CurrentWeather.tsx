@@ -1,12 +1,12 @@
 "use client"
 import React, {useEffect, useState} from "react"
-import Background from "../Background/Background"
 import {Spinner} from "@heroui/spinner"
 
 type Props = {
 	city: string
 	userInput: string
 	lastCity: string | null
+	setWeatherCondition: (condition: string) => void
 }
 
 type Weather = {
@@ -19,7 +19,7 @@ type Weather = {
 	}
 }
 
-export default function CurrentWeather({city, userInput, lastCity}: Props) {
+export default function CurrentWeather({city, userInput, lastCity, setWeatherCondition}: Props) {
 	const [weather, setCurrentWeather] = useState<Weather | null>(null)
 	const [error, setError] = useState<Error | null>(null)
 	const [loading, setLoading] = useState<boolean>(true)
@@ -37,6 +37,7 @@ export default function CurrentWeather({city, userInput, lastCity}: Props) {
 				console.log(data)
 				setCurrentWeather(data)
 				localStorage.setItem('lastCity', userInput)
+				setWeatherCondition(data.current.condition.text)
 				localStorage.setItem('lastWeather', data.current.condition.text)
 			} catch (e) {
 				setError(e as Error)

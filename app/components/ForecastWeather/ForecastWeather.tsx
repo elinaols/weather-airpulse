@@ -8,9 +8,10 @@ type Props = {
     city: string,
     userInput: string
     lastCity: string | null
+    setWeatherCondition: (condition: string) => void
 }
 
-export default function Forecast({city, userInput, lastCity}: Props) {
+export default function Forecast({city, userInput, lastCity, setWeatherCondition}: Props) {
     const [forecastWeather, setForecastWeather] = useState<WeatherForecast | null>(null)
     const [error, setError] = useState<Error | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
@@ -26,6 +27,7 @@ export default function Forecast({city, userInput, lastCity}: Props) {
                 console.log(data)
                 setForecastWeather(data)
                 localStorage.setItem('lastCity', userInput)
+                setWeatherCondition(data.current.condition.text)
                 localStorage.setItem('lastWeather', data.current.condition.text)
             } catch (e) {
                 setError(e as Error)

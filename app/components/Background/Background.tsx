@@ -2,7 +2,7 @@
 import {useEffect, useState} from "react"
 
 type Props = {
-	weather?: string
+	weather?: string | null
 }
 
 export default function Background({weather}: Props) {
