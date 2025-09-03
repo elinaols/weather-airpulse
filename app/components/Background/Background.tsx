@@ -56,7 +56,7 @@ export default function Background({weather}: Props) {
 		}
 
 		setBackground(newBg)
-		localStorage.setItem('lastWeather', newBg)
+		localStorage.setItem('lastWeather', w)
 		// Updates the background gradient whenever the 'weather'-prop changes
 	}, [weather])
 	
