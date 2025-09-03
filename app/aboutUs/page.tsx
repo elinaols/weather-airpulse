@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from "react"
 import BoxLarge from "../components/BoxLarge/BoxLarge"
 import BoxSmall from "../components/BoxSmall/BoxSmall"
