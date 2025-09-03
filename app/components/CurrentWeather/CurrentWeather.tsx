@@ -30,15 +30,19 @@ export default function CurrentWeather({city, userInput, lastCity, setWeatherCon
 			try {
 				// Set loading to true until the request is completed
 				setLoading(true)
+
 				const response = await fetch(
 					`https://api.weatherapi.com/v1/current.json?key=e59095ee21d54915a00195257251501&q=${city}`
 				)
+
 				const data: Weather = await response.json()
 				console.log(data)
+
 				setCurrentWeather(data)
-				localStorage.setItem('lastCity', userInput || lastCity || '')
+				userInput && localStorage.setItem('lastCity', userInput)
+
 				setWeatherCondition(data.current.condition.text)
-				localStorage.setItem('lastWeather', data.current.condition.text)
+				localStorage.setItem('lastWeather', data.current.condition.text)				
 			} catch (e) {
 				setError(e as Error)
 			} finally {
