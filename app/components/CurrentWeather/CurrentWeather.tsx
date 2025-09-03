@@ -31,9 +31,9 @@ export default function CurrentWeather({city, userInput, lastCity, setWeatherCon
 				// Set loading to true until the request is completed
 				setLoading(true)
 
-				const cityQuery = userInput || lastCity || "Stockholm"
+				const cleanCityStr = city.replace(/[åäÅÄ]/g, "a").replace(/[ö]/g, "o")
 				const response = await fetch(
-					`https://api.weatherapi.com/v1/current.json?key=e59095ee21d54915a00195257251501&q=${encodeURIComponent(cityQuery)}`
+					`https://api.weatherapi.com/v1/current.json?key=e59095ee21d54915a00195257251501&q=${cleanCityStr}`
 				)
 
 				const data: Weather = await response.json()
