@@ -58,7 +58,7 @@ export default function CurrentWeather({city, userInput, lastCity, setWeatherCon
 			}
 		}
 		fetchWeather()
-	}, [userInput, setWeatherCondition])
+	}, [city, userInput, setWeatherCondition])
 
 	// Displays an error message if the request fails
 	if (error) return <ErrorFallback error={error} resetErrorBoundary={() => setError(null)}/>

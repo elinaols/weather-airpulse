@@ -49,7 +49,7 @@ export default function Forecast({city, userInput, lastCity, setWeatherCondition
         }
         fetchForecastWeather()
         // Triggers a new API request whenever 'city' changes
-    }, [userInput, setWeatherCondition])
+    }, [city, userInput, setWeatherCondition])
     
     // Displays error message if the API request fails
     if (error) return <ErrorFallback error={error} resetErrorBoundary={() => setError(null)}/>
