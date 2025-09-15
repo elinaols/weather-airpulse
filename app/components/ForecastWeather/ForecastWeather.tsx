@@ -15,7 +15,7 @@ export default function Forecast({city, userInput, lastCity, setWeatherCondition
     const [forecastWeather, setForecastWeather] = useState<WeatherForecast | null>(null)
     const [error, setError] = useState<Error | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
-    const [validInput, setValidInput] = useState<string>('')
+    const [validInput, setValidInput] = useState<string>(lastCity ?? "Stockholm")
 
     // Fetches forecast data whenever the 'city'-prop changes. The prop contains the sanitized value from the search input
     useEffect(() => {

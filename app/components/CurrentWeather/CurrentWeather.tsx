@@ -24,7 +24,7 @@ export default function CurrentWeather({city, userInput, lastCity, setWeatherCon
 	const [weather, setCurrentWeather] = useState<Weather | null>(null)
 	const [error, setError] = useState<Error | null>(null)
 	const [loading, setLoading] = useState<boolean>(true)
-	const [validInput, setValidInput] = useState<string>('')
+	const [validInput, setValidInput] = useState<string>(lastCity ?? "Stockholm")
 
 	// Fetches weather data whenever the 'city' prop changes. The prop holds the sanitized value from the search input
 	useEffect(() => {
