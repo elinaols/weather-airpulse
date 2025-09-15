@@ -27,10 +27,10 @@ export default function Forecast({city, userInput, lastCity, setWeatherCondition
                 const cleanCityStr = city.replace(/[åäÅÄ]/g, "a").replace(/[ö]/g, "o")
                 const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=e59095ee21d54915a00195257251501&q=${cleanCityStr}&days=14`)
                 
-                if (!response.ok) throw new Error("City not found")
-
-                const data: WeatherForecast = await response.json()
+                const data: WeatherForecast | {error: {code: number; message: string} } = await response.json()
                 console.log(data)
+                
+                if ("error" in data) throw new Error(data.error.message)
 
                 setForecastWeather(data)
                 if (userInput) { 
