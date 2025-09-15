@@ -36,8 +36,10 @@ export default function CurrentWeather({city, userInput, lastCity, setWeatherCon
 					`https://api.weatherapi.com/v1/current.json?key=e59095ee21d54915a00195257251501&q=${cleanCityStr}`
 				)
 
-				const data: Weather = await response.json()
+				const data: Weather | {error: {code: number; message: string}} = await response.json()
 				console.log(data)
+
+				if ("error" in data) throw new Error(data.error.message)
 
 				setCurrentWeather(data)
 				if (userInput) {
