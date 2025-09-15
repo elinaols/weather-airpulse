@@ -68,7 +68,7 @@ export default function CurrentWeather({city, userInput, lastCity, setWeatherCon
 
 	const displayCity = error 
     ? lastCity
-    : validInput ?? weather?.location.name 
+    : validInput ?? lastCity ?? weather?.location.name 
 
 	// Shows a loading message while fetching data and displaying the content once the request completes
 	return (
