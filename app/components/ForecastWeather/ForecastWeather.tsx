@@ -58,7 +58,7 @@ export default function Forecast({city, userInput, lastCity, setWeatherCondition
 
     const displayCity = error 
     ? lastCity
-    : validInput ?? forecastWeather?.location.name 
+    : validInput ?? lastCity ?? forecastWeather?.location.name 
 
     /*
         Displays a loading message while the request is pending to inform the user that data is being retrieved.
