@@ -36,10 +36,10 @@ export default function Forecast({city, userInput, lastCity, setWeatherCondition
                 setForecastWeather(data)
 
                 if (userInput.trim()) {
+                    setValidInput(userInput)
                     localStorage.setItem('lastCity', userInput)
                     localStorage.setItem('lastWeather', data.current.condition.text)
                     setWeatherCondition(data.current.condition.text)
-                    setValidInput(userInput)
                 } 
             } catch (e) {
                 setError(e as Error)
@@ -57,7 +57,7 @@ export default function Forecast({city, userInput, lastCity, setWeatherCondition
     const forecastDays = forecastWeather?.forecast.forecastday || []
 
     const displayCity = error 
-    ? validInput ?? lastCity ?? forecastWeather?.location.name 
+    ? lastCity ?? forecastWeather?.location.name 
     : validInput ?? forecastWeather?.location.name 
 
     /*
