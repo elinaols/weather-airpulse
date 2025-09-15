@@ -38,10 +38,9 @@ export default function Forecast({city, userInput, lastCity, setWeatherCondition
                 if (userInput.trim()) {
                     setValidCity(userInput)
                     localStorage.setItem('lastCity', userInput)
+                    setWeatherCondition(data.current.condition.text)
+                    localStorage.setItem('lastWeather', data.current.condition.text)
                 }
-                
-                setWeatherCondition(data.current.condition.text)
-                localStorage.setItem('lastWeather', data.current.condition.text)
             } catch (e) {
                 setError(e as Error)
             } finally {
