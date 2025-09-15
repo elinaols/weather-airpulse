@@ -15,6 +15,7 @@ export default function Forecast({city, userInput, lastCity, setWeatherCondition
     const [forecastWeather, setForecastWeather] = useState<WeatherForecast | null>(null)
     const [error, setError] = useState<Error | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
+    const [validInput, setValidInput] = useState<string|null>(lastCity ?? null)
 
     // Fetches forecast data whenever the 'city'-prop changes. The prop contains the sanitized value from the search input
     useEffect(() => {
@@ -34,10 +35,11 @@ export default function Forecast({city, userInput, lastCity, setWeatherCondition
 
                 setForecastWeather(data)
 
-                if (userInput.trim() && !error) {
+                if (userInput.trim()) {
                     localStorage.setItem('lastCity', userInput)
-                    setWeatherCondition(data.current.condition.text)
                     localStorage.setItem('lastWeather', data.current.condition.text)
+                    setWeatherCondition(data.current.condition.text)
+                    setValidInput(userInput)
                 } 
             } catch (e) {
                 setError(e as Error)
@@ -54,6 +56,10 @@ export default function Forecast({city, userInput, lastCity, setWeatherCondition
 
     const forecastDays = forecastWeather?.forecast.forecastday || []
 
+    const displayCity = error 
+    ? lastCity ?? forecastWeather?.location.name 
+    : validInput ?? forecastWeather?.location.name 
+
     /*
         Displays a loading message while the request is pending to inform the user that data is being retrieved.
     */
@@ -63,7 +69,7 @@ export default function Forecast({city, userInput, lastCity, setWeatherCondition
                 <p>Loading...</p>
             ) : (
                 <div className="w-[95%] px-[0.4rem] grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <h2 className="md:col-span-3 lg:text-4xl sm:text-3xl text-2xl py-[1rem]">Next 3 days weather in {error ? (lastCity ?? forecastWeather?.location.name) : (userInput ?? forecastWeather?.location.name)}</h2>
+                    <h2 className="md:col-span-3 lg:text-4xl sm:text-3xl text-2xl py-[1rem]">Next 3 days weather in {displayCity}</h2>
                     {/* 
                         Checks if the array exists and is not empty to ensure that the component doesn't attempt to iterate over an empty 
                         or non-existing array. Once the condition is fulfilled the map()-function will iterate over the fetched array.
