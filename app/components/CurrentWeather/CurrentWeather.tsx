@@ -24,6 +24,7 @@ export default function CurrentWeather({city, userInput, lastCity, setWeatherCon
 	const [weather, setCurrentWeather] = useState<Weather | null>(null)
 	const [error, setError] = useState<Error | null>(null)
 	const [loading, setLoading] = useState<boolean>(true)
+	const [lastValidCity, setLastValidCity] = useState<string>(lastCity ?? city)
 
 	// Fetches weather data whenever the 'city' prop changes. The prop holds the sanitized value from the search input
 	useEffect(() => {
@@ -43,6 +44,7 @@ export default function CurrentWeather({city, userInput, lastCity, setWeatherCon
 				if ("error" in data) throw new Error(data.error.message)
 
 				setCurrentWeather(data)
+				setLastValidCity(userInput)
 				if (userInput) {
 					localStorage.setItem('lastCity', userInput)
 				}
@@ -62,6 +64,7 @@ export default function CurrentWeather({city, userInput, lastCity, setWeatherCon
 	// Displays an error message if the request fails
 	if (error) return <ErrorFallback error={error} resetErrorBoundary={() => setError(null)}/>
 
+	const displayCity = error ? lastValidCity : city
 
 	// Converting kph to meter per second and rounds the result to two decimals
 	const meterPerSec = (kph: number) => (0.27778 * kph).toFixed(2)
@@ -74,7 +77,7 @@ export default function CurrentWeather({city, userInput, lastCity, setWeatherCon
 			) : (
 				<div className="w-full grid grid-cols-2 gap-y-2 sm:gap-y-10 gap-x-16 pb-8">
 					<h1 className="col-span-2 text-center text-[1.8rem] md:text-[2.6rem] sm:text-4xl lg:text-5xl font-semibold pb-[0.5rem] sm:pb-[1.5rem]">
-						Current weather in {error ? (lastCity ?? city) : (userInput || (lastCity ?? city))}
+						Current weather in {displayCity}
 					</h1>
 					<div className="text-[5rem] flex justify-center flex-col items-center sm:items-end col-span-2 sm:col-span-1">
 						<p className="temperature text-[4rem] sm:text-[4.5rem] md:text-[5rem]">
