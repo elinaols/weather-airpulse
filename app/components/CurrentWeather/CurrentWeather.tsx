@@ -67,7 +67,7 @@ export default function CurrentWeather({city, userInput, lastCity, setWeatherCon
 	const meterPerSec = (kph: number) => (0.27778 * kph).toFixed(2)
 
 	const displayCity = error 
-    ? lastCity ?? weather?.location.name 
+    ? validInput ?? lastCity ?? weather?.location.name 
     : validInput ?? weather?.location.name 
 
 	// Shows a loading message while fetching data and displaying the content once the request completes

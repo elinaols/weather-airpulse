@@ -57,7 +57,7 @@ export default function Forecast({city, userInput, lastCity, setWeatherCondition
     const forecastDays = forecastWeather?.forecast.forecastday || []
 
     const displayCity = error 
-    ? lastCity ?? forecastWeather?.location.name 
+    ? validInput ?? lastCity ?? forecastWeather?.location.name 
     : validInput ?? forecastWeather?.location.name 
 
     /*
