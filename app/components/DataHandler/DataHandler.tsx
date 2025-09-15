@@ -21,16 +21,13 @@ export default function DataHandler({showCurrentWeather, showForecastWeather}: P
 	// Contains the sanitized input from the user that views on the screen
 	const [userInput, setUserInput] = useState("")
 	const [lastCity, setLastCity] = useState<string | null>(null)
-	const [weatherCondition, setWeatherCondition] = useState<string>('')
+	const [weatherCondition, setWeatherCondition] = useState<string>('Stockholm')
 	
 	// On initial render, retrieve the last searched city from localStorage and set it in state
 	useEffect(() => {
 		const city = localStorage.getItem('lastCity')
-
-		if (city) {
-			setLastCity(city)
-			setNewCity(city)
-		}
+		if (city) setLastCity(city)
+		if (city) setNewCity(city)
 	}, [])
 
 	return (
