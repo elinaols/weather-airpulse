@@ -15,6 +15,7 @@ export default function Forecast({city, userInput, lastCity, setWeatherCondition
     const [forecastWeather, setForecastWeather] = useState<WeatherForecast | null>(null)
     const [error, setError] = useState<Error | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
+    const [forecastCity, setForecastCity] = useState<string>(localStorage.getItem("lastCity") ?? "Stockholm")
 
     // Fetches forecast data whenever the 'city'-prop changes. The prop contains the sanitized value from the search input
     useEffect(() => {
@@ -33,6 +34,7 @@ export default function Forecast({city, userInput, lastCity, setWeatherCondition
                 if ("error" in data) throw new Error(data.error.message)
 
                 setForecastWeather(data)
+                setForecastCity(userInput)
                 if (userInput) { 
                     localStorage.setItem('lastCity', userInput)
                 }
@@ -64,7 +66,7 @@ export default function Forecast({city, userInput, lastCity, setWeatherCondition
                 <p>Loading...</p>
             ) : (
                 <div className="w-[95%] px-[0.4rem] grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <h2 className="md:col-span-3 lg:text-4xl sm:text-3xl text-2xl py-[1rem]">Next 3 days weather in {userInput || lastCity || forecastWeather?.location.name}</h2>
+                    <h2 className="md:col-span-3 lg:text-4xl sm:text-3xl text-2xl py-[1rem]">Next 3 days weather in {forecastCity}</h2>
                     {/* 
                         Checks if the array exists and is not empty to ensure that the component doesn't attempt to iterate over an empty 
                         or non-existing array. Once the condition is fulfilled the map()-function will iterate over the fetched array.
