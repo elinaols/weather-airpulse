@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { WeatherForecast } from "@/app/types/types";
 import WeatherCard from "../WeatherCard/WeatherCard";
+import { ErrorFallback } from "../ErrorHandler/ErrorHandler";
 
 type Props = {
     city: string,
@@ -22,6 +23,7 @@ export default function Forecast({city, userInput, lastCity, setWeatherCondition
                 // Set loading to true until the request is completed
                 setLoading(true)
 
+                // cleans string (if it's from localStorage) for correct api request
                 const cleanCityStr = city.replace(/[åäÅÄ]/g, "a").replace(/[ö]/g, "o")
                 const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=e59095ee21d54915a00195257251501&q=${cleanCityStr}&days=14`)
                 
@@ -46,7 +48,7 @@ export default function Forecast({city, userInput, lastCity, setWeatherCondition
     }, [city, userInput, setWeatherCondition])
     
     // Displays error message if the API request fails
-    if (error) return <p>Error: {error?.message}</p>
+    if (error) return <ErrorFallback error={error} resetErrorBoundary={() => setError(null)}/>
 
     const forecastDays = forecastWeather?.forecast.forecastday || []
 

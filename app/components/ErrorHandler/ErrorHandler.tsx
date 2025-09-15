@@ -5,7 +5,7 @@ import Button from "../Button/Button"
     Clicking the button allows the user to try submitting a new 'city' value
     Code adapted from https://www.npmjs.com/package/react-error-boundary
 */
-function ErrorFallback({error, resetErrorBoundary}: FallbackProps) {
+export function ErrorFallback({error, resetErrorBoundary}: FallbackProps) {
 	return (
 		<div>
 			<p className="text-start">Something went wrong while submitting the form:</p>
