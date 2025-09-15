@@ -7,9 +7,8 @@ import Button from "../Button/Button"
 */
 export function ErrorFallback({error, resetErrorBoundary}: FallbackProps) {
 	return (
-		<div>
-			<p className="text-start">Something went wrong while submitting the form:</p>
-			<p className="text-start pb-2">{error.message}</p>
+		<div className="pb-2">
+			<p className="text-start pb-2 text-red-700">Something went wrong while submitting the form: {error.message}</p>
 			<Button type="submit" onClick={resetErrorBoundary} text="Try again" />
 		</div>
 	)

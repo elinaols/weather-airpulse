@@ -44,8 +44,8 @@ export default function CurrentWeather({city, userInput, lastCity, setWeatherCon
 				if ("error" in data) throw new Error(data.error.message)
 
 				setCurrentWeather(data)
-				
-				if (userInput.trim() && !error) {
+
+				if (userInput.trim()) {
 					setValidCity(userInput)
 					localStorage.setItem('lastCity', userInput)
 					setWeatherCondition(data.current.condition.text)
